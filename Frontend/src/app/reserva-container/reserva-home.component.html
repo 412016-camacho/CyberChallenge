@@ -1,0 +1,17 @@
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+  <div class="md:col-span-1">
+    <!-- TODO: Appointment Filter -->
+    <app-reserva-filtro (filtrado)="filtered($event)"></app-reserva-filtro>
+  </div>
+  <div class="md:col-span-3">
+    <!-- TODO: Appointment List -->
+      <app-reserva-list
+        [listaReserva]="listaReserva"
+        [clientes]="clientes"
+        [videojuegos]="videojuegos"
+        [puestos]="puestos">
+      </app-reserva-list>
+  </div>
+  <div class="md:col-span-1">
+  </div>
+</div>

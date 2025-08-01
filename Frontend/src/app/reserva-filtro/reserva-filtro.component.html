@@ -1,0 +1,62 @@
+<div class="bg-white p-4 rounded-lg shadow">
+  <h3 class="text-lg font-semibold mb-4">Filtrar Turnos</h3>
+  <form #myForm="ngForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Cliente</label>
+      <select
+        name="cliente"
+        [(ngModel)]="reserva.clienteId"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        <option value="" selected>Todos</option>
+        <!-- Opciones de pacientes aquí -->
+        @for (c of clientes; track c.id) {
+          <option value="{{c.id}}">{{c.nombreCompleto}}</option>
+        }
+      </select>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Videojuego</label>
+      <select
+        name="videojuego"
+        [(ngModel)]="reserva.videojuegoId"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        <option value="" selected>Todos</option>
+        <!-- Opciones de médicos aquí -->
+        @for (v of videojuegos; track $index) {
+          <option value="{{v.id}}">{{v.titulo}}</option>
+        }
+      </select>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Puestos Juego</label>
+      <select
+        name="puesto"
+        [(ngModel)]="reserva.puestoId"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        <option value="" selected>Todos</option>
+        <!-- Opciones de médicos aquí -->
+        @for (p of puestos; track $index) {
+          <option value="{{p.id}}">{{p.nombre}}</option>
+        }
+      </select>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Fecha</label>
+      <input type="date"
+             name="fecha"
+             [(ngModel)]="reserva.fechaHora"
+             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+    </div>
+
+    <button type="submit"
+            class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+      Aplicar Filtros
+    </button>
+    <div class="text-red-500 text-sm mt-2">
+      Falta cargar datos de pacientes o médicos.
+    </div>
+  </form>
+</div>

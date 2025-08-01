@@ -1,0 +1,140 @@
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow">
+  <h2 class="text-2xl font-bold mb-6">Nuevo Reserva</h2>
+  <form  #myForm="ngForm" (ngSubmit)="reservar(myForm)"  class="space-y-6">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Cliente</label>
+      <select
+        name="clienteId"
+        [(ngModel)]="reservas.clienteId"
+        required
+        #cliente="ngModel"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        <option [ngValue]="0" disabled >Seleccione un cliente</option>
+        @for (c of clientes; track $index) {
+          <option [value]="c.id">{{c.nombreCompleto}}</option>
+        }
+        @if (cliente.getError("required") && (cliente.dirty || cliente.touched)) {
+          <div class="text-red-500 text-sm mt-2">
+            Debe seleccionar un cliente.
+          </div>
+        }
+      </select>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Videojuego</label>
+      <select
+        name="videojuegoId"
+        [(ngModel)]="reservas.videojuegoId"
+        required
+        #videojuego="ngModel"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        <option [ngValue]="null" disabled>Seleccione un videojuego</option>
+        @for (v of videojuegos; track $index) {
+          <option [value]="v.id">{{v.titulo}}</option>
+        }
+        @if (videojuego.getError("required") && (videojuego.dirty || videojuego.touched)) {
+          <div class="text-red-500 text-sm mt-2">
+            Debe seleccionar un videojuego.
+          </div>
+        }
+      </select>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Puesto Juego</label>
+      <select
+        name="puestoId"
+        [(ngModel)]="reservas.puestoId"
+        required
+        #puesto="ngModel"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        <option [ngValue]="null" disabled>Seleccione un puesto</option>
+        @for (p of puestos; track $index) {
+          <option [value]="p.id">{{p.nombre}}</option>
+        }
+        @if (puesto.getError("required") && (puesto.dirty || puesto.touched)) {
+          <div class="text-red-500 text-sm mt-2">
+            Debe seleccionar un puesto.
+          </div>
+        }
+      </select>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Fecha</label>
+      <input type="date"
+             name="fecha"
+             [(ngModel)]="fechaString"
+             required
+             #fecha="ngModel"
+             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+      >
+      @if (fecha.getError("required") && (fecha.dirty || fecha.touched)) {
+        <div class="text-red-500 text-sm mt-2">
+          Debe seleccionar un fecha.
+        </div>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Hora</label>
+      <input type="time"
+             name="hora"
+             [(ngModel)]="horaString"
+             required
+             #hora="ngModel"
+             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+      >
+      @if (hora.getError("required") && (hora.dirty || hora.touched)) {
+        <div class="text-red-500 text-sm mt-2">
+          Debe seleccionar un hora.
+        </div>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Duración</label>
+      <select
+        name="duracion"
+        [(ngModel)]="reservas.duracionMinutos"
+        required
+        #duracion="ngModel"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        <option [ngValue]="0" disabled>Seleccione una duración</option>
+        <option [value]="30">30 minutos</option>
+        <option [value]="60">60 minutos</option>
+        <option [value]="90">90 minutos</option>
+        <option [value]="120">120 minutos</option>
+      </select>
+      @if (duracion.getError("required") && (duracion.dirty || duracion.touched)) {
+        <div class="text-red-500 text-sm mt-2">
+          Debe seleccionar una duracion.
+        </div>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Observaciones</label>
+      <input
+        name="observaciones"
+        [(ngModel)]="reservas.observaciones"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"/>
+    </div>
+
+    <div class="flex justify-end space-x-3">
+      <button (click)="cancelar()" type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm
+                font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2
+                focus:ring-offset-2 focus:ring-indigo-500">
+        Cancelar
+      </button>
+      <button  [disabled]="!myForm.form.valid"
+                type="submit"
+               class="bg-indigo-600 py-2 px-4 border border-transparent rounded-md shadow-sm
+                text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2
+                focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-400">
+        Reservar
+      </button>
+    </div>
+  </form>
+</div>
